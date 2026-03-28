@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HOD Semester Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="bg-image">
+
+<div class="overlay">
+
+<h2>Department Semester Results</h2>
+
+<table>
+<tr>
+<th>USN</th>
+<th>Name</th>
+<th>Subject</th>
+<th>Credits</th>
+<th>IA (50)</th>
+<th>SEE (100)</th>
+<th>Total</th>
+<th>Grade</th>
+</tr>
+
+{% for row in data %}
+<tr>
+<td>{{ row[0] }}</td>
+<td>{{ row[1] }}</td>
+<td>{{ row[2] }}</td>
+<td>{{ row[3] }}</td>
+<td>{{ row[4] }}</td>
+<td>{{ row[5] }}</td>
+<td>{{ row[6] }}</td>
+<td>{{ row[7] }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+<br>
+
+<button onclick="window.location.href='/hod_dashboard?dept={{ dept }}'">
+    Back to Dashboard
+</button>
+
+</div>
+
+</body>
+</html>

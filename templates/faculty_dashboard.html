@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Faculty Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-image">
+
+<div class="overlay">
+
+    <h2>Faculty Dashboard</h2>
+
+    <h3>Welcome {{ name }}</h3>
+
+    <h3>Your Subjects</h3>
+
+{% for sub in subjects %}
+    <a href="/enter_marks?sub={{ sub }}&name={{ name }}">
+        <button>{{ sub }}</button>
+    </a>
+{% endfor %}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HOD Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-image">
+
+<div class="overlay">
+
+    <h2>HOD Login</h2>
+
+    <form method="POST">
+        <input type="text" name="name" placeholder="Name" required><br>
+        <input type="text" name="department" placeholder="Department (CSE/ISE)" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+
+        <button type="submit">Login</button>
+    </form>
+
+</div>
+
+</body>
+</html>

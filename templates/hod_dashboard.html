@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HOD Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-image">
+
+<div class="overlay">
+
+    <h2>HOD Dashboard</h2>
+    <h3>Department: {{ dept }}</h3>
+
+    <button onclick="window.location.href='/hod_assign?dept={{ dept }}'">
+        Assign Faculty
+    </button>
+
+    <button onclick="window.location.href='/hod_view?dept={{ dept }}'">
+        View Student Reports
+    </button>
+    <button onclick="window.location.href='/hod_results?dept={{ dept }}'">
+    View Semester Results
+    </button>
+
+</div>
+
+</body>
+</html>

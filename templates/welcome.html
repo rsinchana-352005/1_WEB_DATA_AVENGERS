@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Maha Parihara</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<!--  USE SEPARATE BACKGROUND -->
+<body class="welcome-bg">
+
+<div class="overlay">
+
+    <img src="{{ url_for('static', filename='images/logo.jpeg') }}" class="logo">
+
+    <h1>Welcome to Maha Parihara</h1>
+    <p>Academic Management System</p>
+
+    <br>
+
+    <a href="/roles">
+        <button>Enter System</button>
+    </a>
+
+</div>
+
+</body>
+</html>

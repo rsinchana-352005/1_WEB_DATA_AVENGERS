@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-image">
+
+<div class="overlay">
+
+    <h1>Welcome, {{ user[1] }}</h1>
+
+    <div class="student-info">
+        <p><span class="label">USN:</span> {{ user[2] }}</p>
+        <p><span class="label">Department:</span> {{ user[3] }}</p>
+        <p><span class="label">Semester:</span> {{ user[4] }}</p>
+    </div>
+
+    <h2>Your Subjects</h2>
+
+    <div class="subjects-grid">
+        {% for sub in subjects %}
+            <a href="/subject/{{ sub[0] }}?usn={{ user[2] }}">
+                <button>{{ sub[1] }}</button>
+            </a>
+        {% endfor %}
+    </div>
+
+    <br>
+
+    <!-- FINAL REPORT BUTTON -->
+   <a href="/student_report?usn={{ user[2] }}">
+    <button>View Internal Report</button>
+   </a>
+
+   <a href="/student_results?usn={{ user[2] }}">
+    <button>View Semester Results</button>
+   </a>
+
+</div>
+
+</body>
+</html>

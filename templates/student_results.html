@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Semester Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!--  Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        @media print {
+            button, canvas, h3 {
+                display: none;
+            }
+        }
+
+        /*  BIG CHART */
+        canvas {
+            width: 100% !important;
+            height: 400px !important;
+            margin: 25px auto;
+            display: block;
+        }
+    </style>
+</head>
+
+<body class="bg-image">
+
+<div class="overlay">
+
+    <div id="report">
+
+        <h2 style="text-align:center;">Semester Report</h2>
+
+        <!-- ✅ STUDENT DETAILS -->
+        <p><b>Name:</b> {{ name }}</p>
+        <p><b>USN:</b> {{ usn }}</p>
+        <p><b>Department:</b> {{ department }}</p>
+        <p><b>Semester:</b> {{ semester }}</p>
+
+        <hr>
+
+        <!-- TABLE -->
+        <table border="1" cellpadding="10">
+            <tr>
+                <th>Subject</th>
+                <th>Credits</th>
+                <th>Total</th>
+                <th>Grade</th>
+            </tr>
+
+            {% for row in data %}
+            <tr>
+                <td>{{ row.subject }}</td>
+                <td>{{ row.credits }}</td>
+                <td>{{ row.total }}</td>
+                <td>{{ row.grade }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <br>
+
+        <h3>SGPA: {{ sgpa }}</h3>
+
+        <!-- SIGNATURE -->
+        <br><br><br>
+
+        <div style="display:flex; justify-content:space-between; margin-top:50px;">
+            <div>
+                <p>______________________</p>
+                <p>Student Signature</p>
+            </div>
+
+            <div>
+                <p>______________________</p>
+                <p>HOD Signature</p>
+            </div>
+        </div>
+
+        <!--  CHART BELOW SIGNATURE -->
+        <br><br>
+
+        <h3>Performance Overview</h3>
+        <canvas id="performanceChart"></canvas>
+
+    </div>
+
+    <br>
+
+    <!-- DOWNLOAD -->
+    <button onclick="downloadReport()">Download Report</button>
+
+    <br><br>
+
+    <!-- BACK -->
+    <button onclick="window.location.href='/student_dashboard?usn={{ usn }}'">
+        Back to Dashboard
+    </button>
+
+</div>
+
+<!--  CHART SCRIPT -->
+<script>
+    let subjects = {{ data | map(attribute='subject') | list | tojson }};
+    let marks = {{ data | map(attribute='total') | list | tojson }};
+
+    new Chart(document.getElementById("performanceChart"), {
+        type: 'bar',
+        data: {
+            labels: subjects,
+            datasets: [{
+                label: 'Total Marks',
+                data: marks,
+                backgroundColor: [
+                    "#ff6384", "#36a2eb", "#ffce56",
+                    "#4bc0c0", "#9966ff", "#ff9f40"
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: "white" },
+                    grid: { color: "#555" }
+                },
+                x: {
+                    ticks: { color: "white" },
+                    grid: { color: "#555" }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: { color: "white" }
+                }
+            }
+        }
+    });
+</script>
+
+<!--  DOWNLOAD SCRIPT -->
+<script>
+function downloadReport() {
+    var content = document.getElementById("report").innerHTML;
+
+    var newWindow = window.open('', '', 'height=700,width=900');
+
+    newWindow.document.write('<html><head><title>Report</title>');
+    newWindow.document.write('<style>table{width:100%;border-collapse:collapse;} th,td{padding:10px;border:1px solid black;text-align:center;} h2,h3{text-align:center;}</style>');
+    newWindow.document.write('</head><body>');
+    newWindow.document.write(content);
+    newWindow.document.write('</body></html>');
+
+    newWindow.document.close();
+    newWindow.print();
+}
+</script>
+
+</body>
+</html>

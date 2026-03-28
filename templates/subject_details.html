@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subject Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-image">
+
+<div class="overlay">
+
+    <h2>{{ subject }} ({{ code }})</h2>
+
+    <div class="student-info">
+        <p><span class="label">IA1:</span> {{ ia1 }}</p>
+        <p><span class="label">IA2:</span> {{ ia2 }}</p>
+        <p><span class="label">IA3:</span> {{ ia3 }}</p>
+        <p><span class="label">Best of 2 Avg:</span> {{ avg }}</p>
+        <p><span class="label">Attendance:</span> {{ attendance }}%</p>
+    </div>
+
+    {% if attendance < 80 %}
+        <p style="color:red; font-weight:bold;">⚠️ Attendance below 80%</p>
+    {% endif %}
+
+</div>
+
+</body>
+</html>

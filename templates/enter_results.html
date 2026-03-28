@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enter Semester Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="bg-image">
+
+<div class="overlay">
+
+    <h2>Enter Semester Results</h2>
+
+    <!-- SUCCESS MESSAGE -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <p style="color: lightgreen; font-weight: bold;">
+          {{ messages[0] }}
+        </p>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+
+        <input type="text" name="usn" placeholder="USN" required><br>
+
+        <input type="text" name="subject_code" placeholder="Subject Code" required><br>
+
+        <input type="number" name="credits" placeholder="Credits" required><br>
+
+        <input type="number" name="ia_total" placeholder="IA + Assignment (50)" required><br>
+
+        <input type="number" name="see_marks" placeholder="SEE (100)" required><br>
+
+        <button type="submit">Save</button>
+
+    </form>
+
+    <br>
+
+    <button onclick="window.location.href='/admin_dashboard'">
+        Back to Dashboard
+    </button>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,159 @@
+/* RESET */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+}
+
+/* BACKGROUND */
+.bg-image {
+    background: url("../images/logo.jpeg") no-repeat center center/cover;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* OVERLAY (CENTERED BOX) */
+.overlay {
+    position: relative;
+    margin: 40px auto;
+    padding: 25px;
+
+    text-align: center;
+    color: white;
+
+    background: rgba(16, 16, 15, 0.65);
+    border-radius: 12px;
+
+    width: 80%;
+    max-width: 900px;
+}
+
+/* LOGO */
+.logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+/* LINKS */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/*  BUTTON (IMPROVED SPACING) */
+button {
+    padding: 8px 16px;
+    border: none;
+    background: linear-gradient(45deg, #ff9800, #ff5722);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+
+    width: auto;
+    min-width: 140px;
+    margin: 10px 5px;   /*  better spacing */
+    display: inline-block;
+}
+
+/* FORM CENTER */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* INPUT */
+input, select {
+    padding: 10px;
+    width: 220px;
+    border-radius: 6px;
+    border: none;
+    margin: 6px 0;
+}
+
+/* SUBJECT GRID */
+.subjects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+/* 🔥 TABLE IMPROVED */
+table {
+    width: 100%;
+    background: white;
+    color: black;
+    border-collapse: collapse;
+    font-size: 14px;   /* slightly bigger */
+}
+
+th, td {
+    padding: 8px;   /*  better spacing */
+    border: 1px solid black;
+}
+
+th {
+    background: orange;
+    color: white;
+}
+
+/* REPORT ALIGNMENT */
+#report {
+    text-align: left;
+}
+
+/*  CHART SIZE CONTROL */
+canvas {
+    width: 100% !important;
+    height: 400px !important;   /* bigger */
+    margin: 25px auto;
+    display: block;
+}
+/* VIDEO BACKGROUND (kept safe, even if unused) */
+#bg-video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    min-width: 100%;
+    min-height: 100%;
+
+    width: auto;
+    height: auto;
+
+    object-fit: contain;
+    z-index: -1;
+}
+
+/* SCROLL ENABLE */
+body {
+    overflow-y: auto;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 600px) {
+    .overlay {
+        width: 90%;
+    }
+
+    .subjects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+/* WELCOME PAGE BACKGROUND */
+.welcome-bg {
+    background: url("../images/welcome.jpeg") no-repeat center center/cover;
+    min-height: 100vh;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assign Faculty</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="bg-image">
+
+<div class="overlay">
+
+    <h2>Assign Faculty</h2>
+
+   
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <p style="color: lightgreen; font-weight: bold;">
+          {{ messages[0] }}
+        </p>
+      {% endif %}
+    {% endwith %}
+
+    <!-- FORM -->
+    <form method="POST">
+
+        <input type="text" name="faculty_name" placeholder="Faculty Name" required><br>
+
+        <select name="subject_code" required>
+            <option value="23CS601">Full Stack Development</option>
+            <option value="23CS602">Machine Learning</option>
+            <option value="23CS603">Blockchain</option>
+            <option value="23OE604">Open Elective</option>
+            <option value="23CS605">Project</option>
+            <option value="23CSL606">ML Lab</option>
+            <option value="23CS607">DevOps</option>
+            <option value="23CSL608">FSD Lab</option>
+        </select><br>
+
+        <button type="submit">Assign</button>
+
+    </form>
+
+    <br>
+
+    <button onclick="window.location.href='/hod_dashboard'">
+        Back to Dashboard
+    </button>
+
+</div>
+
+</body>
+</html>

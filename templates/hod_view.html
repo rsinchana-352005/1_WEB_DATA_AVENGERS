@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HOD Report</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-image">
+
+<div class="overlay">
+
+<h2>Department Student Report</h2>
+
+<table>
+<tr>
+<th>USN</th>
+<th>Name</th>
+<th>Subject</th>
+<th>IA1</th>
+<th>IA2</th>
+<th>IA3</th>
+<th>Best IA</th>
+<th>Attendance</th>
+<th>SGPA</th>
+</tr>
+
+{% for row in data %}
+<tr>
+<td>{{ row.usn }}</td>
+<td>{{ row.name }}</td>
+<td>{{ row.subject }}</td>
+<td>{{ row.ia1 }}</td>
+<td>{{ row.ia2 }}</td>
+<td>{{ row.ia3 }}</td>
+<td>{{ row.best }}</td>
+<td>{{ row.attendance }}%</td>
+<td>{{ row.sgpa }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+</body>
+</html>

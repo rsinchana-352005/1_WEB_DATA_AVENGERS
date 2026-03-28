@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-image">
+
+<div class="overlay">
+
+    <h2>Admin Dashboard</h2>
+
+    <button onclick="window.location.href='/register_student'">
+        Register Student
+    </button>
+
+    <button onclick="window.location.href='/register_faculty'">
+        Register Faculty
+    </button>
+
+    <button onclick="window.location.href='/enter_results'">
+        Upload Results
+    </button>
+
+</div>
+
+</body>
+</html>

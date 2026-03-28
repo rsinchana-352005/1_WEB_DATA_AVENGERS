@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Internal Report</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        @media print {
+            button, canvas, h3 {
+                display: none;
+            }
+        }
+
+        /*  BIG + CLEAR CHARTS */
+        canvas {
+            width: 100% !important;
+            height: 400px !important;
+            margin: 25px auto;
+            display: block;
+        }
+    </style>
+</head>
+
+<body class="bg-image">
+
+<div class="overlay">
+
+    <div id="report">
+
+        <h2 style="text-align:center;">Internal Report</h2>
+
+        <!-- ✅ STUDENT DETAILS -->
+        <p><b>Name:</b> {{ name }}</p>
+        <p><b>USN:</b> {{ usn }}</p>
+        <p><b>Department:</b> {{ department }}</p>
+        <p><b>Semester:</b> {{ semester }}</p>
+
+        <hr>
+
+        <!-- TABLE -->
+        <table border="1" cellpadding="10">
+            <tr>
+                <th>Subject</th>
+                <th>IA1</th>
+                <th>IA2</th>
+                <th>IA3</th>
+                <th>Best IA</th>
+                <th>Attendance</th>
+            </tr>
+
+            {% for row in data %}
+            <tr>
+                <td>{{ row.subject }}</td>
+                <td>{{ row.ia1 }}</td>
+                <td>{{ row.ia2 }}</td>
+                <td>{{ row.ia3 }}</td>
+                <td>{{ row.best }}</td>
+                <td>
+                    {{ row.attendance }}%
+                    {% if row.warning %}
+                        ⚠️
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <br>
+
+        <!-- SGPA -->
+        <h3>SGPA: {{ sgpa }}</h3>
+
+        <!-- SIGNATURE -->
+        <br><br><br>
+
+        <div style="display:flex; justify-content:space-between; margin-top:50px;">
+            <div>
+                <p>______________________</p>
+                <p>Student Signature</p>
+            </div>
+
+            <div>
+                <p>______________________</p>
+                <p>HOD Signature</p>
+            </div>
+        </div>
+
+        <!--  CHARTS BELOW SIGNATURE -->
+        <br><br>
+
+        <h3>Attendance Overview</h3>
+        <canvas id="attendanceChart"></canvas>
+
+        <h3>Performance Overview</h3>
+        <canvas id="performanceChart"></canvas>
+
+    </div>
+
+    <br>
+
+    <button onclick="window.print()">Download PDF</button>
+
+</div>
+
+<!--  FINAL SCRIPT -->
+<script>
+    let subjects = {{ data | map(attribute='subject') | list | tojson }};
+    let attendance = {{ data | map(attribute='attendance') | list | tojson }};
+    let marks = {{ data | map(attribute='best') | list | tojson }};
+
+    let colors = [
+        "#ff6384", "#36a2eb", "#ffce56",
+        "#4bc0c0", "#9966ff", "#ff9f40"
+    ];
+
+    // 📊 Attendance Chart
+    new Chart(document.getElementById("attendanceChart"), {
+        type: 'bar',
+        data: {
+            labels: subjects,
+            datasets: [{
+                label: 'Attendance %',
+                data: attendance,
+                backgroundColor: colors
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: "white" },
+                    grid: { color: "#555" }
+                },
+                x: {
+                    ticks: { color: "white" },
+                    grid: { color: "#555" }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: { color: "white" }
+                }
+            }
+        }
+    });
+
+    // 📈 Performance Chart
+    new Chart(document.getElementById("performanceChart"), {
+        type: 'line',
+        data: {
+            labels: subjects,
+            datasets: [{
+                label: 'IA Marks',
+                data: marks,
+                borderColor: "#00e5ff",
+                backgroundColor: "rgba(0,229,255,0.2)",
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: "#00e5ff"
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: "white" },
+                    grid: { color: "#555" }
+                },
+                x: {
+                    ticks: { color: "white" },
+                    grid: { color: "#555" }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: { color: "white" }
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
